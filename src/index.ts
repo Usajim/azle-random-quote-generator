@@ -1,4 +1,22 @@
-import { Canister, query, text,  } from 'azle';
+import { Canister, query, text, update, Void  } from 'azle';
+
+let quoteOfTheDay = '';
+let name ='';
+
+function getGreeting(): string {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+  
+    if (currentHour >= 0 && currentHour < 12) {
+      return "Good morning";
+    } else if (currentHour >= 12 && currentHour < 17) {
+      return "Good afternoon";
+    } else {
+      return "Good evening";
+    }
+  }
+
+let greetings = getGreeting()
 
 let quotes = [
     "In the realm of coding, precision is the key to unlocking the door to innovation",
@@ -9,12 +27,28 @@ let quotes = [
     "The difference between ordinary and extraordinary is that little extra."
   ];
 
-  const getRandomQuote =   quotes[Math.floor(Math.random() * quotes.length)];
+  let getRandomQuote =   quotes[Math.floor(Math.random() * quotes.length)];
 
 export default Canister (
-    {
+
+    {       
+       
         getQuote: query([], text, () => {
             return getRandomQuote;
         }),
+
+        setMessage: update([text], Void, (yourName) => {
+            name = yourName;
+        }),
+
+        getPersonalisedQuote: query([], text, () => {
+            return `${greetings} ${name}. Here is the quote of the day: ${getRandomQuote}`; 
+        }),
+
+
+        
+
     }
-);
+
+    
+); 

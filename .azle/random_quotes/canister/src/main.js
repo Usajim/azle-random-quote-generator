@@ -30,7 +30,7 @@ function _extends() {
     };
     return _extends.apply(this, arguments);
 }
-var _class, _class1, _class2, _class3, _class4, _class5;
+var _class, _class1, _class2, _class3, _class4, _class5, _class6;
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -43,8 +43,8 @@ var __commonJS = (cb, mod)=>function __require() {
         }).exports, mod), mod.exports;
     };
 var __export = (target, all)=>{
-    for(var name in all)__defProp(target, name, {
-        get: all[name],
+    for(var name2 in all)__defProp(target, name2, {
+        get: all[name2],
         enumerable: true
     });
 };
@@ -1595,14 +1595,14 @@ var require_buffer = __commonJS({
                 }
             };
         }
-        E("ERR_BUFFER_OUT_OF_BOUNDS", function(name) {
-            if (name) {
-                return `${name} is outside of buffer bounds`;
+        E("ERR_BUFFER_OUT_OF_BOUNDS", function(name2) {
+            if (name2) {
+                return `${name2} is outside of buffer bounds`;
             }
             return "Attempt to access memory outside buffer bounds";
         }, RangeError);
-        E("ERR_INVALID_ARG_TYPE", function(name, actual) {
-            return `The "${name}" argument must be of type number. Received type ${typeof actual}`;
+        E("ERR_INVALID_ARG_TYPE", function(name2, actual) {
+            return `The "${name2}" argument must be of type number. Received type ${typeof actual}`;
         }, TypeError);
         E("ERR_OUT_OF_RANGE", function(str, range, input) {
             let msg = `The value of "${str}" is out of range.`;
@@ -1651,9 +1651,9 @@ var require_buffer = __commonJS({
             }
             checkBounds(buf, offset, byteLength2);
         }
-        function validateNumber(value, name) {
+        function validateNumber(value, name2) {
             if (typeof value !== "number") {
-                throw new errors.ERR_INVALID_ARG_TYPE(name, "number", value);
+                throw new errors.ERR_INVALID_ARG_TYPE(name2, "number", value);
             }
         }
         function boundsError(value, length, type) {
@@ -94547,11 +94547,11 @@ var require_encoding = __commonJS({
                 var pointer = index2.indexOf(code_point);
                 return pointer === -1 ? null : pointer;
             }
-            function index(name) {
+            function index(name2) {
                 if (!("encoding-indexes" in global)) {
                     throw Error("Indexes missing. Did you forget to include encoding-indexes.js first?");
                 }
-                return global["encoding-indexes"][name];
+                return global["encoding-indexes"][name2];
             }
             function indexGB18030RangesCodePointFor(pointer) {
                 if (pointer > 39419 && pointer < 189e3 || pointer > 1237575) return null;
@@ -94874,12 +94874,12 @@ var require_encoding = __commonJS({
                 encodings.forEach(function(category) {
                     if (category.heading !== "Legacy single-byte encodings") return;
                     category.encodings.forEach(function(encoding) {
-                        var name = encoding.name;
-                        var idx = index(name.toLowerCase());
-                        decoders[name] = function(options) {
+                        var name2 = encoding.name;
+                        var idx = index(name2.toLowerCase());
+                        decoders[name2] = function(options) {
                             return new SingleByteDecoder(idx, options);
                         };
-                        encoders[name] = function(options) {
+                        encoders[name2] = function(options) {
                             return new SingleByteEncoder(idx, options);
                         };
                     });
@@ -97524,10 +97524,10 @@ variant ${k} -> ${e.message}`);
     }
     encodeValue(x) {
         for(let i = 0; i < this._fields.length; i++){
-            const [name, type] = this._fields[i];
-            if (x.hasOwnProperty(name)) {
+            const [name2, type] = this._fields[i];
+            if (x.hasOwnProperty(name2)) {
                 const idx = lebEncode(i);
-                const buf = type.encodeValue(x[name]);
+                const buf = type.encodeValue(x[name2]);
                 return concat(idx, buf);
             }
         }
@@ -97571,13 +97571,13 @@ variant ${k} -> ${e.message}`);
         return `variant {${fields.join("; ")}}`;
     }
     valueToString(x) {
-        for (const [name, type] of this._fields){
-            if (x.hasOwnProperty(name)) {
-                const value = type.valueToString(x[name]);
+        for (const [name2, type] of this._fields){
+            if (x.hasOwnProperty(name2)) {
+                const value = type.valueToString(x[name2]);
                 if (value === "null") {
-                    return `variant {${name}}`;
+                    return `variant {${name2}}`;
                 } else {
-                    return `variant {${name}=${value}}`;
+                    return `variant {${name2}=${value}}`;
                 }
             }
         }
@@ -98056,8 +98056,8 @@ function decode2(retTypes, bytes2) {
                 {
                     const fields = {};
                     for (const [hash, ty] of entry[1]){
-                        const name = `_${hash}_`;
-                        fields[name] = getType(ty);
+                        const name2 = `_${hash}_`;
+                        fields[name2] = getType(ty);
                     }
                     const record = Record(fields);
                     const tuple = record.tryAsTuple();
@@ -98071,8 +98071,8 @@ function decode2(retTypes, bytes2) {
                 {
                     const fields = {};
                     for (const [hash, ty] of entry[1]){
-                        const name = `_${hash}_`;
-                        fields[name] = getType(ty);
+                        const name2 = `_${hash}_`;
+                        fields[name2] = getType(ty);
                     }
                     return Variant(fields);
                 }
@@ -98085,7 +98085,7 @@ function decode2(retTypes, bytes2) {
                 {
                     const rec = {};
                     const methods = entry[1];
-                    for (const [name, typeRef] of methods){
+                    for (const [name2, typeRef] of methods){
                         let type = getType(typeRef);
                         if (type instanceof RecClass) {
                             type = type.getType();
@@ -98093,7 +98093,7 @@ function decode2(retTypes, bytes2) {
                         if (!(type instanceof FuncClass)) {
                             throw new Error("Illegal service definition: services can only contain functions");
                         }
-                        rec[name] = type;
+                        rec[name2] = type;
                     }
                     return Service(rec);
                 }
@@ -98415,6 +98415,22 @@ var AzleText = (_class3 = class {
     }
 }, _class3._azleKind = "AzleText", _class3);
 var text = AzleText;
+// node_modules/azle/src/lib/candid/types/primitive/void.ts
+var AzleVoid = (_class4 = class {
+    static toBytes(data) {
+        return encode3(this, data);
+    }
+    static fromBytes(bytes2) {
+        return decode3(this, bytes2);
+    }
+    static getIdl() {
+        return [];
+    }
+    constructor(){
+        this._azleKind = "AzleVoid";
+    }
+}, _class4._azleKind = "AzleVoid", _class4);
+var Void = AzleVoid;
 // node_modules/azle/src/lib/candid/types/reference/service/canister_function/query_update.ts
 function createQueryMethods(canisterOptions) {
     return Object.entries(canisterOptions).filter(([_name, canisterMethod])=>canisterMethod.mode === "query").map(([methodName2, canisterMethod])=>createQueryMethod(methodName2, canisterMethod.async, canisterMethod.guard));
@@ -98569,7 +98585,7 @@ function Canister(canisterOptions) {
     return result;
 }
 // node_modules/azle/src/lib/candid/types/reference/principal.ts
-var Principal3 = (_class4 = class extends Principal {
+var Principal3 = (_class5 = class extends Principal {
     static toBytes(data) {
         return encode3(this, data);
     }
@@ -98579,7 +98595,7 @@ var Principal3 = (_class4 = class extends Principal {
     static getIdl(_parents) {
         return idl_exports.Principal;
     }
-}, _class4._azleKind = "Principal", _class4);
+}, _class5._azleKind = "Principal", _class5);
 // node_modules/azle/src/lib/candid/serde/decode.ts
 function decode3(candidType, data) {
     if (Array.isArray(candidType)) {
@@ -98797,7 +98813,7 @@ function encodeMultiple(candidTypes, data) {
     return new Uint8Array(idl_exports.encode(idls, values));
 }
 // node_modules/azle/src/lib/candid/types/primitive/nats/nat64.ts
-var AzleNat64 = (_class5 = class {
+var AzleNat64 = (_class6 = class {
     static toBytes(data) {
         return encode3(this, data);
     }
@@ -98810,7 +98826,7 @@ var AzleNat64 = (_class5 = class {
     constructor(){
         this._azleKind = "AzleNat64";
     }
-}, _class5._azleKind = "AzleNat64", _class5);
+}, _class6._azleKind = "AzleNat64", _class6);
 var nat64 = AzleNat64;
 // node_modules/azle/src/lib/ic/call_raw.ts
 function callRaw(canisterId, method, argsRaw, payment) {
@@ -99513,7 +99529,35 @@ function query(paramCandidTypes, returnCandidType, callback, methodArgs) {
         guard: methodArgs == null ? void 0 : methodArgs.guard
     };
 }
+// node_modules/azle/src/lib/canister_methods/methods/update.ts
+function update(paramCandidTypes, returnCandidType, callback, methodArgs) {
+    const finalCallback = callback === void 0 ? void 0 : (...args)=>{
+        var _methodArgs_manual;
+        executeMethod("update", args, callback, paramCandidTypes, returnCandidType, (_methodArgs_manual = methodArgs == null ? void 0 : methodArgs.manual) != null ? _methodArgs_manual : false);
+    };
+    return {
+        mode: "update",
+        callback: finalCallback,
+        paramCandidTypes,
+        returnCandidType,
+        async: callback === void 0 ? false : isAsync(callback),
+        guard: methodArgs == null ? void 0 : methodArgs.guard
+    };
+}
 // src/index.ts
+var name = "";
+function getGreeting() {
+    const currentTime = /* @__PURE__ */ new Date();
+    const currentHour = currentTime.getHours();
+    if (currentHour >= 0 && currentHour < 12) {
+        return "Good morning";
+    } else if (currentHour >= 12 && currentHour < 17) {
+        return "Good afternoon";
+    } else {
+        return "Good evening";
+    }
+}
+var greetings = getGreeting();
 var quotes = [
     "In the realm of coding, precision is the key to unlocking the door to innovation",
     "Programming is not just about writing code; it's a journey of continuous improvement and problem-solving",
@@ -99526,6 +99570,14 @@ var getRandomQuote = quotes[Math.floor(Math.random() * quotes.length)];
 var src_default = Canister({
     getQuote: query([], text, ()=>{
         return getRandomQuote;
+    }),
+    setMessage: update([
+        text
+    ], Void, (yourName)=>{
+        name = yourName;
+    }),
+    getPersonalisedQuote: query([], text, ()=>{
+        return `${greetings} ${name}. Here is the quote of the day: ${getRandomQuote}`;
     })
 });
 // <stdin>

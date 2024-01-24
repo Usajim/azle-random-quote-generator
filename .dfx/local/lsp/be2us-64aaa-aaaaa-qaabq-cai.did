@@ -1,1 +1,5 @@
-service : { getQuote : () -> (text) query }
+service : {
+  getPersonalisedQuote : () -> (text) query;
+  getQuote : () -> (text) query;
+  setMessage : (text) -> ();
+}

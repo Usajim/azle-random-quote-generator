@@ -1,4 +1,8 @@
 export const idlFactory = ({ IDL }) => {
-  return IDL.Service({ 'getQuote' : IDL.Func([], [IDL.Text], ['query']) });
+  return IDL.Service({
+    'getPersonalisedQuote' : IDL.Func([], [IDL.Text], ['query']),
+    'getQuote' : IDL.Func([], [IDL.Text], ['query']),
+    'setMessage' : IDL.Func([IDL.Text], [], []),
+  });
 };
 export const init = ({ IDL }) => { return []; };
